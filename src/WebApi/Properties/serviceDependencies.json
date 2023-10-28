@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "postgresql1": {
+      "ignored": "true",
+      "type": "postgresql",
+      "connectionId": "ConnectionStrings:DefaultConnection",
+      "dynamicId": null
+    }
+  }
+}

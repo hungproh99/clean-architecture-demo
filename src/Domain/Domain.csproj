@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <RootNamespace>test.Domain</RootNamespace>
+        <AssemblyName>test.Domain</AssemblyName>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Platforms>AnyCPU;x64</Platforms>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Entities\" />
+      <Folder Include="Events\" />
+      <Folder Include="ValueObjects\" />
+    </ItemGroup>
+
+</Project>
