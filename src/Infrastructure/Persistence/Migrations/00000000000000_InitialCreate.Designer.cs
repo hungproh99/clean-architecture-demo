@@ -161,7 +161,7 @@ namespace demo2.Infrastructure.Persistence.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasFilter("NormalizedUserName IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -329,7 +329,7 @@ namespace demo2.Infrastructure.Persistence.Migrations
                     b.HasIndex("NormalizedName")
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasFilter("NormalizedName IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
                 });
