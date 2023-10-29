@@ -1,5 +1,5 @@
-﻿using test.Application.Common.Interfaces;
-using test.Infrastructure.Persistence;
+﻿using demo2.Application.Common.Interfaces;
+using demo2.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -7,11 +7,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
-namespace test.Application.IntegrationTests;
+namespace demo2.Application.IntegrationTests;
 
 using static Testing;
 
-internal class CustomWebApplicationFactory : WebApplicationFactory<Program>
+public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -28,14 +28,14 @@ internal class CustomWebApplicationFactory : WebApplicationFactory<Program>
         builder.ConfigureServices((builder, services) =>
         {
             services
-                .Remove<IUser>()
-                .AddTransient(provider => Mock.Of<IUser>(s =>
-                    s.Id == GetUserId()));
+                .Remove<ICurrentUserService>()
+                .AddTransient(provider => Mock.Of<ICurrentUserService>(s =>
+                    s.UserId == GetCurrentUserId()));
 
             services
                 .Remove<DbContextOptions<ApplicationDbContext>>()
                 .AddDbContext<ApplicationDbContext>((sp, options) =>
-                    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+                    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"),
                         builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
         });
     }

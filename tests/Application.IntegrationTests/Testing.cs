@@ -1,5 +1,5 @@
-﻿using test.Infrastructure.Identity;
-using test.Infrastructure.Persistence;
+﻿using demo2.Infrastructure.Identity;
+using demo2.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using Respawn;
 
-namespace test.Application.IntegrationTests;
+namespace demo2.Application.IntegrationTests;
 
 [SetUpFixture]
 public partial class Testing
@@ -17,8 +17,8 @@ public partial class Testing
     private static WebApplicationFactory<Program> _factory = null!;
     private static IConfiguration _configuration = null!;
     private static IServiceScopeFactory _scopeFactory = null!;
-    private static Respawner _checkpoint = null!;
-    private static string? _userId;
+    private static Checkpoint _checkpoint = null!;
+    private static string? _currentUserId;
 
     [OneTimeSetUp]
     public void RunBeforeAnyTests()
@@ -27,16 +27,10 @@ public partial class Testing
         _scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
         _configuration = _factory.Services.GetRequiredService<IConfiguration>();
 
-        using var scope = _scopeFactory.CreateScope();
-
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
-        context.Database.Migrate();
-
-        _checkpoint = Respawner.CreateAsync(_configuration.GetConnectionString("DefaultConnection")!, new RespawnerOptions
+        _checkpoint = new Checkpoint
         {
-            TablesToIgnore = new Respawn.Graph.Table[] { "__EFMigrationsHistory" }
-        }).GetAwaiter().GetResult();
+            TablesToIgnore = new[] { "__EFMigrationsHistory" }
+        };
     }
 
     public static async Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request)
@@ -48,18 +42,9 @@ public partial class Testing
         return await mediator.Send(request);
     }
 
-    public static async Task SendAsync(IBaseRequest request)
+    public static string? GetCurrentUserId()
     {
-        using var scope = _scopeFactory.CreateScope();
-
-        var mediator = scope.ServiceProvider.GetRequiredService<ISender>();
-
-        await mediator.Send(request);
-    }
-
-    public static string? GetUserId()
-    {
-        return _userId;
+        return _currentUserId;
     }
 
     public static async Task<string> RunAsDefaultUserAsync()
@@ -96,9 +81,9 @@ public partial class Testing
 
         if (result.Succeeded)
         {
-            _userId = user.Id;
+            _currentUserId = user.Id;
 
-            return _userId;
+            return _currentUserId;
         }
 
         var errors = string.Join(Environment.NewLine, result.ToApplicationResult().Errors);
@@ -108,15 +93,9 @@ public partial class Testing
 
     public static async Task ResetState()
     {
-        try
-        {
-            await _checkpoint.ResetAsync(_configuration.GetConnectionString("DefaultConnection")!);
-        }
-        catch (Exception) 
-        {
-        }
+        await _checkpoint.Reset(_configuration.GetConnectionString("DefaultConnection"));
 
-        _userId = null;
+        _currentUserId = null;
     }
 
     public static async Task<TEntity?> FindAsync<TEntity>(params object[] keyValues)

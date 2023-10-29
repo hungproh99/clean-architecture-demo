@@ -1,12 +1,11 @@
-﻿using Ardalis.GuardClauses;
-using test.Application.Common.Exceptions;
-using test.Application.TodoLists.Commands.CreateTodoList;
-using test.Application.TodoLists.Commands.UpdateTodoList;
-using test.Domain.Entities;
+﻿using demo2.Application.Common.Exceptions;
+using demo2.Application.TodoLists.Commands.CreateTodoList;
+using demo2.Application.TodoLists.Commands.UpdateTodoList;
+using demo2.Domain.Entities;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace test.Application.IntegrationTests.TodoLists.Commands;
+namespace demo2.Application.IntegrationTests.TodoLists.Commands;
 
 using static Testing;
 
@@ -41,7 +40,7 @@ public class UpdateTodoListTests : BaseTestFixture
         (await FluentActions.Invoking(() =>
             SendAsync(command))
                 .Should().ThrowAsync<ValidationException>().Where(ex => ex.Errors.ContainsKey("Title")))
-                .And.Errors["Title"].Should().Contain("'Title' must be unique.");
+                .And.Errors["Title"].Should().Contain("The specified title already exists.");
     }
 
     [Test]

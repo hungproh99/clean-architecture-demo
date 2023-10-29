@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "postgresql1": {
-      "ignored": "true",
-      "type": "mssql",
-      "connectionId": "ConnectionStrings:DefaultConnection"
-    }
-  }
-}

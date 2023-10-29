@@ -1,12 +1,12 @@
-﻿using test.Application.Common.Exceptions;
-using test.Application.Common.Security;
-using test.Application.TodoLists.Commands.CreateTodoList;
-using test.Application.TodoLists.Commands.PurgeTodoLists;
-using test.Domain.Entities;
+﻿using demo2.Application.Common.Exceptions;
+using demo2.Application.Common.Security;
+using demo2.Application.TodoLists.Commands.CreateTodoList;
+using demo2.Application.TodoLists.Commands.PurgeTodoLists;
+using demo2.Domain.Entities;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace test.Application.IntegrationTests.TodoLists.Commands;
+namespace demo2.Application.IntegrationTests.TodoLists.Commands;
 
 using static Testing;
 

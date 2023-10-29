@@ -1,10 +1,10 @@
-﻿using test.Application.TodoLists.Queries.GetTodos;
-using test.Domain.Entities;
-using test.Domain.ValueObjects;
+﻿using demo2.Application.TodoLists.Queries.GetTodos;
+using demo2.Domain.Entities;
+using demo2.Domain.ValueObjects;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace test.Application.IntegrationTests.TodoLists.Queries;
+namespace demo2.Application.IntegrationTests.TodoLists.Queries;
 
 using static Testing;
 

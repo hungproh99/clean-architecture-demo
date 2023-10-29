@@ -1,12 +1,12 @@
-﻿using Ardalis.GuardClauses;
-using test.Application.TodoItems.Commands.CreateTodoItem;
-using test.Application.TodoItems.Commands.UpdateTodoItem;
-using test.Application.TodoLists.Commands.CreateTodoList;
-using test.Domain.Entities;
+﻿using demo2.Application.Common.Exceptions;
+using demo2.Application.TodoItems.Commands.CreateTodoItem;
+using demo2.Application.TodoItems.Commands.UpdateTodoItem;
+using demo2.Application.TodoLists.Commands.CreateTodoList;
+using demo2.Domain.Entities;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace test.Application.IntegrationTests.TodoItems.Commands;
+namespace demo2.Application.IntegrationTests.TodoItems.Commands;
 
 using static Testing;
 
