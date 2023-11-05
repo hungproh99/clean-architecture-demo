@@ -2,8 +2,6 @@
 using demo2.Application.TodoLists.Commands.CreateTodoList;
 using demo2.Application.TodoLists.Commands.UpdateTodoList;
 using demo2.Domain.Entities;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace demo2.Application.IntegrationTests.TodoLists.Commands;
 
@@ -40,7 +38,7 @@ public class UpdateTodoListTests : BaseTestFixture
         (await FluentActions.Invoking(() =>
             SendAsync(command))
                 .Should().ThrowAsync<ValidationException>().Where(ex => ex.Errors.ContainsKey("Title")))
-                .And.Errors["Title"].Should().Contain("The specified title already exists.");
+                .And.Errors["Title"].Should().Contain("'Title' must be unique.");
     }
 
     [Test]
@@ -68,6 +66,6 @@ public class UpdateTodoListTests : BaseTestFixture
         list.LastModifiedBy.Should().NotBeNull();
         list.LastModifiedBy.Should().Be(userId);
         list.LastModified.Should().NotBeNull();
-        list.LastModified.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));
+        list.LastModified.Should().BeCloseTo(DateTime.Now.ToUniversalTime(), TimeSpan.FromMilliseconds(10000));
     }
 }

@@ -4,5 +4,5 @@ namespace demo2.Infrastructure.Services;
 
 public class DateTimeService : IDateTime
 {
-    public DateTime Now => DateTime.Now;
+    public DateTime Now => DateTime.Now.ToUniversalTime();
 }

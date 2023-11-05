@@ -1,8 +1,10 @@
-﻿namespace demo2.Application.TodoLists.Queries.GetTodos;
+﻿using demo2.Application.Common.Models;
+
+namespace demo2.Application.TodoLists.Queries.GetTodos;
 
 public class TodosVm
 {
-    public IList<PriorityLevelDto> PriorityLevels { get; set; } = new List<PriorityLevelDto>();
+    public IReadOnlyCollection<LookupDto> PriorityLevels { get; init; } = Array.Empty<LookupDto>();
 
-    public IList<TodoListDto> Lists { get; set; } = new List<TodoListDto>();
+    public IReadOnlyCollection<TodoListDto> Lists { get; init; } = Array.Empty<TodoListDto>();
 }

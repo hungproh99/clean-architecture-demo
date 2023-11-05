@@ -1,8 +1,6 @@
 ﻿using demo2.Application.Common.Exceptions;
 using demo2.Application.TodoLists.Commands.CreateTodoList;
 using demo2.Domain.Entities;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace demo2.Application.IntegrationTests.TodoLists.Commands;
 
@@ -51,6 +49,6 @@ public class CreateTodoListTests : BaseTestFixture
         list.Should().NotBeNull();
         list!.Title.Should().Be(command.Title);
         list.CreatedBy.Should().Be(userId);
-        list.Created.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));
+        list.Created.Should().BeCloseTo(DateTime.Now.ToUniversalTime(), TimeSpan.FromMilliseconds(10000));
     }
 }

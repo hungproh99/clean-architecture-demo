@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using demo2.Application.Common.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using demo2.Application.Common.Models;
 
 namespace demo2.Application.Common.Mappings;
 

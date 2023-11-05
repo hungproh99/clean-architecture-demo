@@ -1,36 +1,29 @@
-﻿using demo2.Infrastructure.Identity;
-using demo2.Infrastructure.Persistence;
+﻿using demo2.Domain.Constants;
+using demo2.Infrastructure.Data;
+using demo2.Infrastructure.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
-using Respawn;
 
 namespace demo2.Application.IntegrationTests;
 
 [SetUpFixture]
 public partial class Testing
 {
-    private static WebApplicationFactory<Program> _factory = null!;
-    private static IConfiguration _configuration = null!;
+    private static TestDatabase _database;
+    private static CustomWebApplicationFactory _factory = null!;
     private static IServiceScopeFactory _scopeFactory = null!;
-    private static Checkpoint _checkpoint = null!;
-    private static string? _currentUserId;
+    private static string? _userId;
 
     [OneTimeSetUp]
-    public void RunBeforeAnyTests()
+    public async Task RunBeforeAnyTests()
     {
-        _factory = new CustomWebApplicationFactory();
-        _scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
-        _configuration = _factory.Services.GetRequiredService<IConfiguration>();
+        _database = await TestDatabase.CreateAsync();
 
-        _checkpoint = new Checkpoint
-        {
-            TablesToIgnore = new[] { "__EFMigrationsHistory" }
-        };
+        _factory = new CustomWebApplicationFactory(_database.GetConnection());
+
+        _scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
     }
 
     public static async Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request)
@@ -42,9 +35,18 @@ public partial class Testing
         return await mediator.Send(request);
     }
 
-    public static string? GetCurrentUserId()
+    public static async Task SendAsync(IBaseRequest request)
     {
-        return _currentUserId;
+        using var scope = _scopeFactory.CreateScope();
+
+        var mediator = scope.ServiceProvider.GetRequiredService<ISender>();
+
+        await mediator.Send(request);
+    }
+
+    public static string? GetUserId()
+    {
+        return _userId;
     }
 
     public static async Task<string> RunAsDefaultUserAsync()
@@ -54,7 +56,7 @@ public partial class Testing
 
     public static async Task<string> RunAsAdministratorAsync()
     {
-        return await RunAsUserAsync("administrator@local", "Administrator1234!", new[] { "Administrator" });
+        return await RunAsUserAsync("administrator@local", "Administrator1234!", new[] { Roles.Administrator });
     }
 
     public static async Task<string> RunAsUserAsync(string userName, string password, string[] roles)
@@ -81,9 +83,9 @@ public partial class Testing
 
         if (result.Succeeded)
         {
-            _currentUserId = user.Id;
+            _userId = user.Id;
 
-            return _currentUserId;
+            return _userId;
         }
 
         var errors = string.Join(Environment.NewLine, result.ToApplicationResult().Errors);
@@ -93,9 +95,15 @@ public partial class Testing
 
     public static async Task ResetState()
     {
-        await _checkpoint.Reset(_configuration.GetConnectionString("DefaultConnection"));
+        try
+        {
+            await _database.ResetAsync();
+        }
+        catch (Exception) 
+        {
+        }
 
-        _currentUserId = null;
+        _userId = null;
     }
 
     public static async Task<TEntity?> FindAsync<TEntity>(params object[] keyValues)
@@ -130,7 +138,9 @@ public partial class Testing
     }
 
     [OneTimeTearDown]
-    public void RunAfterAnyTests()
+    public async Task RunAfterAnyTests()
     {
+        await _database.DisposeAsync();
+        await _factory.DisposeAsync();
     }
 }

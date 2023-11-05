@@ -2,8 +2,6 @@
 using demo2.Application.TodoItems.Commands.CreateTodoItem;
 using demo2.Application.TodoLists.Commands.CreateTodoList;
 using demo2.Domain.Entities;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace demo2.Application.IntegrationTests.TodoItems.Commands;
 
@@ -44,8 +42,8 @@ public class CreateTodoItemTests : BaseTestFixture
         item!.ListId.Should().Be(command.ListId);
         item.Title.Should().Be(command.Title);
         item.CreatedBy.Should().Be(userId);
-        item.Created.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));
+        item.Created.Should().BeCloseTo(DateTime.Now.ToUniversalTime(), TimeSpan.FromMilliseconds(10000));
         item.LastModifiedBy.Should().Be(userId);
-        item.LastModified.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));
+        item.LastModified.Should().BeCloseTo(DateTime.Now.ToUniversalTime(), TimeSpan.FromMilliseconds(10000));
     }
 }

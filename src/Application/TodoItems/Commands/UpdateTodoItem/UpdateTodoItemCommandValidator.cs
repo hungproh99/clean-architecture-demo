@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace demo2.Application.TodoItems.Commands.UpdateTodoItem;
+﻿namespace demo2.Application.TodoItems.Commands.UpdateTodoItem;
 
 public class UpdateTodoItemCommandValidator : AbstractValidator<UpdateTodoItemCommand>
 {

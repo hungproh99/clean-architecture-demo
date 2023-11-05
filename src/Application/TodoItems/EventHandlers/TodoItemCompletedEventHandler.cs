@@ -1,5 +1,4 @@
 ﻿using demo2.Domain.Events;
-using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace demo2.Application.TodoItems.EventHandlers;

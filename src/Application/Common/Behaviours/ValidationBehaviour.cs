@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-using MediatR;
-using ValidationException = demo2.Application.Common.Exceptions.ValidationException;
+﻿using ValidationException = demo2.Application.Common.Exceptions.ValidationException;
 
 namespace demo2.Application.Common.Behaviours;
 
@@ -14,7 +12,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
         _validators = validators;
     }
 
-    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
         if (_validators.Any())
         {

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Sdk Name="Microsoft.Build.CentralPackageVersions" Version="2.1.3" />
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>demo2.Application.IntegrationTests</RootNamespace>
         <AssemblyName>demo2.Application.IntegrationTests</AssemblyName>
 
@@ -11,30 +11,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Remove="appsettings.json" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="nunit" />
+        <PackageReference Include="NUnit.Analyzers" />
+        <PackageReference Include="NUnit3TestAdapter" />
+        <PackageReference Include="coverlet.collector" />
+        <PackageReference Include="FluentAssertions" />
+        <PackageReference Include="Moq" />
+        <PackageReference Include="Respawn" />
+        <PackageReference Include="Testcontainers.MsSql" />
     </ItemGroup>
-
     <ItemGroup>
-      <Content Include="appsettings.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.5" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
-        <PackageReference Include="nunit" Version="3.13.3" />
-        <PackageReference Include="NUnit3TestAdapter" Version="4.2.1">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="FluentAssertions" Version="6.7.0" />
-        <PackageReference Include="Moq" Version="4.18.1" />
-        <PackageReference Include="Respawn" Version="4.0.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\src\WebUI\WebUI.csproj" />
+        <ProjectReference Include="..\..\src\WebApi\WebApi.csproj" />
     </ItemGroup>
 
 </Project>

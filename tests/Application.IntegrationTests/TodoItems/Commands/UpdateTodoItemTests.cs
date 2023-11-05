@@ -1,10 +1,7 @@
-﻿using demo2.Application.Common.Exceptions;
-using demo2.Application.TodoItems.Commands.CreateTodoItem;
+﻿using demo2.Application.TodoItems.Commands.CreateTodoItem;
 using demo2.Application.TodoItems.Commands.UpdateTodoItem;
 using demo2.Application.TodoLists.Commands.CreateTodoList;
 using demo2.Domain.Entities;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace demo2.Application.IntegrationTests.TodoItems.Commands;
 
@@ -50,6 +47,6 @@ public class UpdateTodoItemTests : BaseTestFixture
         item.LastModifiedBy.Should().NotBeNull();
         item.LastModifiedBy.Should().Be(userId);
         item.LastModified.Should().NotBeNull();
-        item.LastModified.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));
+        item.LastModified.Should().BeCloseTo(DateTime.Now.ToUniversalTime(), TimeSpan.FromMilliseconds(10000));
     }
 }

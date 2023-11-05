@@ -1,10 +1,7 @@
-﻿using demo2.Application.Common.Exceptions;
-using demo2.Application.TodoItems.Commands.CreateTodoItem;
+﻿using demo2.Application.TodoItems.Commands.CreateTodoItem;
 using demo2.Application.TodoItems.Commands.DeleteTodoItem;
 using demo2.Application.TodoLists.Commands.CreateTodoList;
 using demo2.Domain.Entities;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace demo2.Application.IntegrationTests.TodoItems.Commands;
 

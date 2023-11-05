@@ -1,26 +1,27 @@
-﻿using AutoMapper;
-using demo2.Application.Common.Mappings;
-using demo2.Domain.Entities;
+﻿using demo2.Domain.Entities;
 
 namespace demo2.Application.TodoLists.Queries.GetTodos;
 
-public class TodoItemDto : IMapFrom<TodoItem>
+public class TodoItemDto
 {
-    public int Id { get; set; }
+    public int Id { get; init; }
 
-    public int ListId { get; set; }
+    public int ListId { get; init; }
 
-    public string? Title { get; set; }
+    public string? Title { get; init; }
 
-    public bool Done { get; set; }
+    public bool Done { get; init; }
 
-    public int Priority { get; set; }
+    public int Priority { get; init; }
 
-    public string? Note { get; set; }
+    public string? Note { get; init; }
 
-    public void Mapping(Profile profile)
+    private class Mapping : Profile
     {
-        profile.CreateMap<TodoItem, TodoItemDto>()
-            .ForMember(d => d.Priority, opt => opt.MapFrom(s => (int)s.Priority));
+        public Mapping()
+        {
+            CreateMap<TodoItem, TodoItemDto>().ForMember(d => d.Priority, 
+                opt => opt.MapFrom(s => (int)s.Priority));
+        }
     }
 }
