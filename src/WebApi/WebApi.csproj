@@ -6,9 +6,16 @@
         <IsPackable>true</IsPackable>
         <ImplicitUsings>enable</ImplicitUsings>
         <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
-		<RootNamespace>demo2.WebApi</RootNamespace>
-		<AssemblyName>demo2.WebApi</AssemblyName>
+		<RootNamespace>demo.WebApi</RootNamespace>
+		<AssemblyName>demo.WebApi</AssemblyName>
     </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="Controller\**" />
+      <Content Remove="Controller\**" />
+      <EmbeddedResource Remove="Controller\**" />
+      <None Remove="Controller\**" />
+    </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\Application\Application.csproj" />
@@ -16,10 +23,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <InternalsVisibleTo Include="demo2.Application.IntegrationTests" />
+        <InternalsVisibleTo Include="demo.Application.IntegrationTests" />
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" />

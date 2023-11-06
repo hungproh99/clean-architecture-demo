@@ -20,7 +20,7 @@ param sqlServerAdministratorLogin string
 param sqlServerAdministratorLoginPassword string
 
 @description('The name of the project.')
-param projectName string = 'demo2'
+param projectName string = 'demo'
 
 // Define the environment configuration map.
 var environmentConfigurationMap = {

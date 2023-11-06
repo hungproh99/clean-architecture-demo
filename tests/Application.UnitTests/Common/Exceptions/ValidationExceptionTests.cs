@@ -1,9 +1,9 @@
-﻿using demo2.Application.Common.Exceptions;
+﻿using demo.Application.Common.Exceptions;
 using FluentAssertions;
 using FluentValidation.Results;
 using NUnit.Framework;
 
-namespace demo2.Application.UnitTests.Common.Exceptions;
+namespace demo.Application.UnitTests.Common.Exceptions;
 
 public class ValidationExceptionTests
 {

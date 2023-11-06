@@ -1,11 +1,11 @@
-﻿using demo2.Application.Common.Behaviours;
-using demo2.Application.Common.Interfaces;
-using demo2.Application.TodoItems.Commands.CreateTodoItem;
+﻿using demo.Application.Common.Behaviours;
+using demo.Application.Common.Interfaces;
+using demo.Application.TodoItems.Commands.CreateTodoItem;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 
-namespace demo2.Application.UnitTests.Common.Behaviours;
+namespace demo.Application.UnitTests.Common.Behaviours;
 
 public class RequestLoggerTests
 {

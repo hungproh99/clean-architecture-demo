@@ -18,7 +18,7 @@ jobs:
     needs: [ build ]
     with:
       environmentType: Test
-      resourceGroupName: demo2Test
+      resourceGroupName: demoTest
       sqlServerAdministratorLogin: SqlAdmin
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID_TEST }}
@@ -32,7 +32,7 @@ jobs:
     needs: [ deploy-test ]
     with:
       environmentType: Production
-      resourceGroupName: demo2Production
+      resourceGroupName: demoProduction
       sqlServerAdministratorLogin: SqlAdmin
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID_PRODUCTION }}

@@ -1,12 +1,12 @@
-﻿using demo2.Domain.Constants;
-using demo2.Infrastructure.Data;
-using demo2.Infrastructure.Identity;
+﻿using demo.Domain.Constants;
+using demo.Infrastructure.Data;
+using demo.Infrastructure.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace demo2.Application.IntegrationTests;
+namespace demo.Application.IntegrationTests;
 
 [SetUpFixture]
 public partial class Testing

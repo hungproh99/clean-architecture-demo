@@ -1,11 +1,11 @@
 ﻿using System.Data.Common;
-using demo2.Infrastructure.Data;
+using demo.Infrastructure.Data;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Respawn;
 using Testcontainers.MsSql;
 
-namespace demo2.Application.IntegrationTests;
+namespace demo.Application.IntegrationTests;
 
 public class TestDatabase
 {
