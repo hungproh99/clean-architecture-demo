@@ -5,27 +5,19 @@
         <RootNamespace>demo.Infrastructure</RootNamespace>
         <AssemblyName>demo.Infrastructure</AssemblyName>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>disable</Nullable>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Remove="Data\**" />
-      <EmbeddedResource Remove="Data\**" />
-      <None Remove="Data\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="MailKit" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
-        <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" />
-        <PackageReference Include="MimeKit" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
-        <PackageReference Include="NuGet.Common" />
-        <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
     </ItemGroup>
 
     <ItemGroup>

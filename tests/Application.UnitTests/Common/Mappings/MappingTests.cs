@@ -1,11 +1,14 @@
 ﻿using System.Reflection;
 using System.Runtime.Serialization;
 using AutoMapper;
-using demo.Infrastructure.Data;
+using demo.Application.Common.Interfaces;
+using demo.Application.Common.Models;
+using demo.Application.TodoItems.Queries.GetTodoItemsWithPagination;
+using demo.Application.TodoLists.Queries.GetTodos;
+using demo.Domain.Entities;
 using NUnit.Framework;
 
 namespace demo.Application.UnitTests.Common.Mappings;
-
 public class MappingTests
 {
     private readonly IConfigurationProvider _configuration;
@@ -13,8 +16,8 @@ public class MappingTests
 
     public MappingTests()
     {
-        _configuration = new MapperConfiguration(config => 
-            config.AddMaps(Assembly.GetAssembly(typeof(ApplicationDbContext))));
+        _configuration = new MapperConfiguration(config =>
+            config.AddMaps(Assembly.GetAssembly(typeof(IApplicationDbContext))));
 
         _mapper = _configuration.CreateMapper();
     }
@@ -26,6 +29,11 @@ public class MappingTests
     }
 
     [Test]
+    [TestCase(typeof(TodoList), typeof(TodoListDto))]
+    [TestCase(typeof(TodoItem), typeof(TodoItemDto))]
+    [TestCase(typeof(TodoList), typeof(LookupDto))]
+    [TestCase(typeof(TodoItem), typeof(LookupDto))]
+    [TestCase(typeof(TodoItem), typeof(TodoItemBriefDto))]
     public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
     {
         var instance = GetInstanceOf(source);

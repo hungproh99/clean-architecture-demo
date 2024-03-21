@@ -6,7 +6,6 @@ using Moq;
 using NUnit.Framework;
 
 namespace demo.Application.UnitTests.Common.Behaviours;
-
 public class RequestLoggerTests
 {
     private Mock<ILogger<CreateTodoItemCommand>> _logger = null!;

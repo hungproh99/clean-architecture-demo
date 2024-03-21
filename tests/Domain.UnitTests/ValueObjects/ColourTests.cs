@@ -1,9 +1,9 @@
-﻿
+﻿using demo.Domain.Exceptions;
+using demo.Domain.ValueObjects;
 using FluentAssertions;
 using NUnit.Framework;
 
 namespace demo.Domain.UnitTests.ValueObjects;
-
 public class ColourTests
 {
     [Test]

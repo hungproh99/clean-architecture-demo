@@ -6,7 +6,6 @@ using Respawn;
 using Testcontainers.MsSql;
 
 namespace demo.Application.IntegrationTests;
-
 public class TestDatabase
 {
     private readonly MsSqlContainer _container;
@@ -61,7 +60,7 @@ public class TestDatabase
     {
         await _respawner.ResetAsync(_connectionString);
     }
-    
+
     public async Task DisposeAsync()
     {
         await _connection.DisposeAsync();

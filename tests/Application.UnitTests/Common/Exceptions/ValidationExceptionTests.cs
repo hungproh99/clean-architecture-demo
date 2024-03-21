@@ -4,7 +4,6 @@ using FluentValidation.Results;
 using NUnit.Framework;
 
 namespace demo.Application.UnitTests.Common.Exceptions;
-
 public class ValidationExceptionTests
 {
     [Test]

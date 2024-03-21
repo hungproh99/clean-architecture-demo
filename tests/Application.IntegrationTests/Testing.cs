@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace demo.Application.IntegrationTests;
-
 [SetUpFixture]
 public partial class Testing
 {
@@ -99,7 +98,7 @@ public partial class Testing
         {
             await _database.ResetAsync();
         }
-        catch (Exception) 
+        catch (Exception)
         {
         }
 
